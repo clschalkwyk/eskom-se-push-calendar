@@ -1,0 +1,9 @@
+.env
+.idea
+.venv
+credentials.json
+schedule.json
+search.json
+token.pickle
+_locations_found.json
+
