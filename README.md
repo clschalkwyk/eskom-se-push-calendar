@@ -22,7 +22,7 @@ This tool/scripts are used to pull EskomSePush data and push events to your sele
 
 ### Go to the Google Cloud Console.
 - Select your project → Go to "OAuth consent screen".
-- In the "Test users" section, add the Google accounts (email addresses) that need to use this application, including clschalkwyk@gmail.com. This will allow these accounts to authorize the application without completing the verification process.
+- In the "Test users" section, add the Google accounts (email addresses) that need to use this application, including [your email address]. This will allow these accounts to authorize the application without completing the verification process.
 
 ### Preparing for Verification
 If you intend to make your application available to users outside of your test user list, you'll need to submit it for verification by Google:
