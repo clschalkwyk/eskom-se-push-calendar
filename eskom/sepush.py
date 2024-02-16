@@ -34,13 +34,18 @@ def _get_schedule(area):
         print(f"Fetching schedule for {area}")
         url =f"https://developer.sepush.co.za/business/2.0/area?id={area}"
         res = requests.get(url, headers=headers)
+        print(res.text)
         try:
             if res.status_code == 200:
-                with open(CACHE_FILENAME,'w') as fp:
-                    fp.write(res.text)
-                    print("Schedule saved.")
+                if res.json().get('error'):
+                    print(res.json().get('error'))
+                else:
+                    print("api call status 200")
+                    with open(CACHE_FILENAME,'w') as fp:
+                        fp.write(res.text)
+                        print("Schedule saved.")
+                    return res.json()
 
-                return res.json()
         except:
             print("Unable to pull schedule, try again later")
 
@@ -53,6 +58,8 @@ def get_schedule(area):
     print(f'Current cache age: {cache_file_age} minutes.')
 
     if cache_file_age > 15:
+        print("Remove cached schedule file")
+        os.unlink(CACHE_FILENAME)
         return _get_schedule(area)
 
     if cache_file_age == 0:
@@ -60,4 +67,7 @@ def get_schedule(area):
 
 
 if __name__ == "__main__":
-    get_schedule(ESKOM_LOCATION)
+    if ESKOM_LOCATION:
+        get_schedule(ESKOM_LOCATION)
+    else:
+        print('Eskom location not set..')

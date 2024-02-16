@@ -43,6 +43,9 @@ def collect_events():
     return found
 
 def publish_to_calendar():
+    if not os.path.exists('schedule.json'):
+        print('No schedules found')
+        return
     service = google.login()
 
     # Call the Calendar API
